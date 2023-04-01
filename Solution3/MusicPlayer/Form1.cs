@@ -43,8 +43,8 @@ namespace MusicPlayer
                     playlist.Add(fileName);
                     listBox1.Items.Add(fileName);
                 }
-                    string name= openFileDialog1.FileName;
-                textBox1.Text= name.Substring(26);
+                string name = openFileDialog1.FileName;
+                textBox1.Text = name.Substring(26);
 
             }
             Player.URL = openFileDialog1.FileName;
@@ -57,15 +57,28 @@ namespace MusicPlayer
 
         private void play_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != 0) {
-                openFileDialog1.FileName = listBox1.SelectedItem.ToString();
-                Player.URL = openFileDialog1.FileName;
-                Player.Ctlcontrols.play();
-                string name = openFileDialog1.FileName;
-                textBox1.Text = name.Substring(26);
-            }
+            if (listBox1.SelectedIndex != -1)
+            {
+                if (Player.URL == listBox1.SelectedItem.ToString())
+                {
 
-            Player.Ctlcontrols.play();
+                    Player.Ctlcontrols.play();
+
+
+                }
+                else
+                {
+                    openFileDialog1.FileName = listBox1.SelectedItem.ToString();
+                    Player.URL = openFileDialog1.FileName;
+                    string name = openFileDialog1.FileName;
+                    textBox1.Text = name.Substring(26);
+                    Player.Ctlcontrols.play();
+                }
+            }
+            else
+                Player.Ctlcontrols.play();
+            {
+            }
 
 
         }
@@ -77,6 +90,7 @@ namespace MusicPlayer
 
         private void pause_Click(object sender, EventArgs e)
         {
+
             Player.Ctlcontrols.pause();
         }
 
@@ -86,7 +100,7 @@ namespace MusicPlayer
         }
 
 
-      
+
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -105,26 +119,26 @@ namespace MusicPlayer
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
         {
-            
+
         }
 
         private void geri_Click(object sender, EventArgs e)
         {
-            int count = 0;int a = 0;
+            int count = 0; int a = 0;
             foreach (var items in listBox1.Items)
             {
                 count++;
                 if (Player.URL == items.ToString())
                 {
 
-                    if ( count!=a)
+                    if (count != a)
                     {
-                        int sa = count-2;
+                        int sa = count - 2;
 
                         Player.URL = listBox1.Items[sa].ToString();
                         Player.Ctlcontrols.play();
@@ -146,7 +160,7 @@ namespace MusicPlayer
 
                     if (listBox1.Items.Count > count)
                     {
-                        int sa = count ;
+                        int sa = count;
 
                         Player.URL = listBox1.Items[sa].ToString();
                         Player.Ctlcontrols.play();
@@ -158,4 +172,4 @@ namespace MusicPlayer
         }
     }
 }
-    
+
